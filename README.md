@@ -20,6 +20,7 @@ A personal blog generator that transforms your Last.fm listening history into un
 
 - **Framework:** [Next.js](https://nextjs.org/) (with App Router)
 - **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **UI Components:** [Shadcn/ui](https://ui.shadcn.com/)
 - **Styling:** CSS Modules
 - **Music API:** [Last.fm API](https://www.last.fm/api/intro)
 - **Artificial Intelligence API:** [Google AI Studio (Gemini API)](https://aistudio.google.com/)
