@@ -13,6 +13,8 @@ export async function GET(request: Request) {
 
   const lastfmUrl = `https://ws.audioscrobbler.com/2.0/?method=user.getlovedtracks&user=${user}&api_key=${apiKey}&format=json&limit=5`;
 
+  console.log("URL construida para Last.fm:", lastfmUrl);
+
   try {
     const response = await fetch(lastfmUrl);
     if (!response.ok) {
