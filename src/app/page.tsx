@@ -1,91 +1,75 @@
 // src/app/page.tsx
+'use client';
 
-export const dynamic = 'force-dynamic'; // Asegura que la página siempre sea dinámica
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from '@/components/ui/skeleton';
 
-// Definimos un tipo para nuestros datos para que TypeScript nos ayude
-interface Track {
+// --- 1. AÑADIMOS 'url' A NUESTRO TIPO Track ---
+type Track = {
   name: string;
-  artist: {
-    name: string;
-  };
-  url: string; // La URL original de Last.fm, la usaremos como 'key' única
-}
+  artist: { name: string; };
+  url: string; // <-- La URL de la canción en Last.fm
+};
 
-// Esta función llama DIRECTAMENTE a la API de Last.fm
-async function getTracks() {
-  const apiKey = process.env.LASTFM_API_KEY;
-  const user = 'LyVenegas'; // Tu usuario de Last.fm
+export default function HomePage() {
+  const [tracks, setTracks] = useState<Track[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  if (!apiKey) {
-    console.error('La variable de entorno LASTFM_API_KEY no está configurada.');
-    return [];
-  }
+  useEffect(() => {
+    const fetchTracks = async () => {
+      try {
+        const res = await fetch('/api/lastfm?user=LyVenegas');
+        if (!res.ok) { throw new Error('Fallo al obtener los datos'); }
+        const data = await res.json();
+        setTracks(data?.lovedtracks?.track || []);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchTracks();
+  }, []);
 
-  const lastfmUrl = `https://ws.audioscrobbler.com/2.0/?method=user.getlovedtracks&user=${user}&api_key=${apiKey}&format=json&limit=5`;
-
-  try {
-    const response = await fetch(lastfmUrl, { cache: 'no-store' });
-
-    if (!response.ok) {
-      throw new Error(`La respuesta de Last.fm no fue exitosa. Status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    
-    if (data.error) {
-      throw new Error(`Error de la API de Last.fm: ${data.message}`);
-    }
-
-    return data?.lovedtracks?.track || [];
-  } catch (error) {
-    console.error("Error al obtener los tracks en la página:", error);
-    return [];
-  }
-}
-
-// Nuestra página es un componente asíncrono que obtiene los datos
-export default async function HomePage() {
-  const tracks: Track[] = await getTracks();
+  const containerVariants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } };
+  const itemVariants = { hidden: { y: 20, opacity: 0 }, visible: { y: 0, opacity: 1 } };
 
   return (
-    <main className="container mx-auto p-8 bg-gray-900 text-white min-h-screen">
-      <header className="text-center mb-12">
-        <h1 className="text-5xl font-bold text-green-400">Brinf Music Journal</h1>
-        <p className="text-gray-400 mt-2">Mis últimas 5 canciones favoritas en Last.fm</p>
+    <main className="container mx-auto p-4 md:p-8">
+      <header className="mb-12">
+        <h1 className="font-serif text-5xl font-bold tracking-tight">Music Journal</h1>
+        <p className="text-lg text-muted-foreground mt-2">
+          Una selección de mis canciones favoritas de Last.fm.
+        </p>
       </header>
       
-      {tracks.length > 0 ? (
+      {isLoading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {tracks.map((track) => {
-            // Codificamos los nombres para que sean seguros en una URL
-            const artist = encodeURIComponent(track.artist.name);
-            const trackName = encodeURIComponent(track.name);
-            
-            return (
-              // El 'href' apunta a nuestra página de journal con los datos de la canción
-              <a 
-                key={track.url}
-                href={`/journal/generate-post?artist=${artist}&track=${trackName}`}
-                className="block bg-gray-800 p-5 rounded-lg shadow-lg hover:shadow-green-500/50 hover:-translate-y-1 transition-all duration-300"
-              >
-                <div>
-                  <h2 className="text-2xl font-semibold text-green-300 truncate" title={track.name}>
-                    {track.name}
-                  </h2>
-                  <p className="text-gray-400 text-lg mt-1">{track.artist.name}</p>
-                  <p className="text-green-500 mt-4 inline-block">
-                    Generar entrada →
-                  </p>
-                </div>
-              </a>
-            );
-          })}
+          {Array.from({ length: 9 }).map((_, i) => <Skeleton key={i} className="h-24 rounded-lg" />)}
         </div>
       ) : (
-        <div className="text-center">
-          <p className="text-xl text-red-500">No se pudieron cargar las canciones.</p>
-          <p className="text-gray-500 mt-2">Inténtalo de nuevo más tarde.</p>
-        </div>
+        <motion.div 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {tracks.map((track, index) => (
+            <motion.div key={index} variants={itemVariants}>
+              {/* --- 2. AÑADIMOS la URL de la canción como PARÁMETRO --- */}
+              <Link href={`/journal/${encodeURIComponent(track.name)}?artist=${encodeURIComponent(track.artist.name)}&trackUrl=${encodeURIComponent(track.url)}`}>
+                <Card className="hover:border-primary hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                  <CardHeader>
+                    <CardTitle className="font-serif truncate">{`${track.name} - ${track.artist.name}`}</CardTitle>
+                  </CardHeader>
+                </Card>
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
       )}
     </main>
   );
