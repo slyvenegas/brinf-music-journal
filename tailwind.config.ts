@@ -1,30 +1,42 @@
 // tailwind.config.ts
 import type { Config } from "tailwindcss"
-
-const { fontFamily } = require("tailwindcss/defaultTheme")
+import tailwindcssAnimate from "tailwindcss-animate" // <-- 1. Importamos el plugin aquí
 
 const config = {
-  // ... (otras propiedades como darkMode, content, etc. no cambian)
+  darkMode: "class",
+  content: [
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
+  ],
+  prefix: "",
   theme: {
     container: {
-      // ... (no cambia)
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
     },
     extend: {
-      // --- AÑADE ESTA SECCIÓN ---
-      fontFamily: {
-        sans: ["var(--font-inter)", ...fontFamily.sans],
-        serif: ["var(--font-lora)", ...fontFamily.serif],
-      },
-      // --- FIN DE LA SECCIÓN A AÑADIR ---
       keyframes: {
-        // ... (el resto no cambia)
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
       },
       animation: {
-        // ... (el resto no cambia)
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate], // <-- 2. Y lo usamos aquí
 } satisfies Config
 
 export default config

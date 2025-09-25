@@ -54,7 +54,7 @@ export default function JournalPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
         <div className="space-y-8 sticky top-24">
           <header>
-            <h1 className="text-4xl font-bold tracking-tight font-serif">{track}</h1>
+            <h1 className="text-4xl font-bold tracking-tight">{track}</h1>
             <h2 className="text-2xl text-muted-foreground mt-1">{artist}</h2>
           </header>
           <Card>

@@ -1,17 +1,17 @@
 // src/app/page.tsx
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from '@/components/ui/skeleton';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Music } from "lucide-react"; // <-- Importamos el icono directamente
 
-// --- 1. AÑADIMOS 'url' A NUESTRO TIPO Track ---
 type Track = {
   name: string;
-  artist: { name: string; };
-  url: string; // <-- La URL de la canción en Last.fm
+  artist: { name: string };
+  url: string;
 };
 
 export default function HomePage() {
@@ -34,15 +34,19 @@ export default function HomePage() {
     fetchTracks();
   }, []);
 
-  const containerVariants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } };
-  const itemVariants = { hidden: { y: 20, opacity: 0 }, visible: { y: 0, opacity: 1 } };
+  const containerVariants = { /* ... (no cambia) */ };
+  const itemVariants = { /* ... (no cambia) */ };
 
   return (
     <main className="container mx-auto p-4 md:p-8">
-      <header className="mb-12">
-        <h1 className="font-serif text-5xl font-bold tracking-tight">Music Journal</h1>
-        <p className="text-lg text-muted-foreground mt-2">
-          Una selección de mis canciones favoritas de Last.fm.
+      <header className="mb-12 text-center">
+        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight">
+          <span className="bg-gradient-to-r from-primary/80 to-primary bg-clip-text text-transparent">
+            Music Journal
+          </span>
+        </h1>
+        <p className="text-lg md:text-xl text-muted-foreground mt-4 max-w-2xl mx-auto">
+          Transforma tu historial de Last.fm en un diario poético. Selecciona una de tus canciones favoritas y deja que la IA cree una historia.
         </p>
       </header>
       
@@ -59,12 +63,21 @@ export default function HomePage() {
         >
           {tracks.map((track, index) => (
             <motion.div key={index} variants={itemVariants}>
-              {/* --- 2. AÑADIMOS la URL de la canción como PARÁMETRO --- */}
               <Link href={`/journal/${encodeURIComponent(track.name)}?artist=${encodeURIComponent(track.artist.name)}&trackUrl=${encodeURIComponent(track.url)}`}>
-                <Card className="hover:border-primary hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                  <CardHeader>
-                    <CardTitle className="font-serif truncate">{`${track.name} - ${track.artist.name}`}</CardTitle>
+                <Card className="h-full group hover:border-primary/80 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 bg-muted/20">
+                  {/* --- CORRECCIÓN AQUÍ --- */}
+                  {/* Restauramos el layout flex y el icono Music */}
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-base font-semibold truncate">
+                      {track.name}
+                    </CardTitle>
+                    <Music className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
+                  <CardContent>
+                    <div className="text-sm text-muted-foreground">
+                      {track.artist.name}
+                    </div>
+                  </CardContent>
                 </Card>
               </Link>
             </motion.div>

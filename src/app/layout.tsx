@@ -1,16 +1,13 @@
-// src/app/layout.tsx
 import type { Metadata } from "next";
-// 1. Importa Lora junto a Inter
-import { Inter, Lora } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { Header } from "@/components/ui/header";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
-// 2. Configura ambas fuentes
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const lora = Lora({ subsets: ["latin"], weight: "600", variable: "--font-lora" });
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Brinf Music Journal",
@@ -23,9 +20,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // 3. Aplica las variables de las fuentes al body
+   
     <html lang="es" suppressHydrationWarning>
-      <body className={`${inter.variable} ${lora.variable} font-sans`}>
+      <body className={inter.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
