@@ -2,7 +2,11 @@
 
 A personal blog generator that transforms your Last.fm listening history into unique, AI-generated creative posts. This project connects to your scrobbles, selects a song, and leverages the power of the Google Gemini AI to write an evocative text inspired by the song's title.
 
-*(A future screenshot of the project's polished user interface will be placed here)*
+Light Mode:
+<img width="1920" height="1789" alt="FireShot Capture 096 - Brinf Music Journal -  brinf-music-journal vercel app" src="https://github.com/user-attachments/assets/048079cb-e42f-4ae1-8a35-7247c652e38c" />
+
+Dark Mode:
+<img width="1920" height="1789" alt="FireShot Capture 097 - Brinf Music Journal -  brinf-music-journal vercel app" src="https://github.com/user-attachments/assets/f96d95c8-4567-405b-bc16-dc2ccda2ec4e" />
 
 ---
 
