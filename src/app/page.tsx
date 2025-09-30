@@ -65,8 +65,6 @@ export default function HomePage() {
             <motion.div key={index} variants={itemVariants}>
               <Link href={`/journal/${encodeURIComponent(track.name)}?artist=${encodeURIComponent(track.artist.name)}&trackUrl=${encodeURIComponent(track.url)}`}>
                 <Card className="h-full group hover:border-primary/80 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 bg-muted/20">
-                  {/* --- CORRECCIÓN AQUÍ --- */}
-                  {/* Restauramos el layout flex y el icono Music */}
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-base font-semibold truncate">
                       {track.name}

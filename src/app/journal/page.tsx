@@ -1,4 +1,4 @@
-// src/app/journal/page.tsx
+
 
 export default function JournalListPage() {
   return (

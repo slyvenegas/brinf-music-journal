@@ -25,7 +25,23 @@ export default function JournalPage() {
   const handleGeneratePost = async () => {
     setIsLoading(true);
     setGeneratedPost('');
-    const prompt = `Escribe una entrada de blog poética y reflexiva, de no más de 3 párrafos, inspirada en la canción "${track}" del artista "${artist}".`;
+
+    // --- TU PROMPT DEFINITIVO ---
+    const prompt = `
+      Actúa como un ensayista musical profesional y analítico, con un estilo de escritura agudo, contemporáneo y profundamente introspectivo.
+      Tu objetivo es escribir una reflexión breve (exactamente 3 párrafos, sin título) que conecte la canción "${track}" del artista "${artist}" con un concepto inesperado y enigmático.
+
+      **REGLAS ESTRICTAS (Inquebrantables):**
+      - **NO uses preámbulos, saludos o introducciones.** Empieza directamente con el primer párrafo del ensayo. Tu respuesta debe ser solo el ensayo y nada más.
+      - **EVITA A TODA COSTA** las siguientes frases o estructuras: "Así suena...", "No es solo una canción, es...", "Es un himno a...". Busca conexiones más sutiles, metafóricas y originales.
+      - **NO escribas una reseña musical.** No hables de instrumentación, melodía o producción. Enfócate en la idea y la emoción.
+
+      **ENFOQUE CREATIVO:**
+      Para esta entrada específica, quiero que explores la canción desde una perspectiva lyncheana (David Lynch): hipnótica, onírica, surreal, meditativa y espiritual. Imagina que la canción se convierte en un paisaje en blanco y negro, con movimientos sutiles, sombras inestables y símbolos que nunca terminan de fijarse. 
+      Tu escritura debe transmitir sensación de transformación continua, de algo que respira y cambia, sin jamás caer en lo siniestro, sino en lo enigmático y reflexivo.
+
+      Escribe tu ensayo sobre "${track}".
+    `;
 
     try {
       await new Promise(resolve => setTimeout(resolve, 1000));
