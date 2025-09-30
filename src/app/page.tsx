@@ -41,7 +41,7 @@ export default function HomePage() {
     <main className="container mx-auto p-4 md:p-8">
       <header className="mb-12 text-center">
         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight">
-          <span className="bg-gradient-to-r from-primary/80 to-primary bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-primary/80 to-primary bg-clip-text">
             Music Journal
           </span>
         </h1>
