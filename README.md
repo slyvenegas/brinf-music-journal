@@ -1,60 +1,63 @@
 # 🎼 Brinf Music Journal
 
-A personal blog generator that transforms your Last.fm listening history into unique, AI-generated creative posts. This project connects to your scrobbles, selects a song, and leverages the power of the Google Gemini AI to write an evocative text inspired by the song's title.
+Un generador de blogs personales que transforma tu historial de escucha de Last.fm en publicaciones creativas generadas con IA.  
+Este proyecto se conecta a tus *scrobbles*, selecciona una canción y aprovecha el poder de la IA Google Gemini para escribir un texto evocador inspirado en el título de la canción.
 
-Light Mode:
+Modo Claro:  
 <img width="1920" height="1789" alt="FireShot Capture 096 - Brinf Music Journal -  brinf-music-journal vercel app" src="https://github.com/user-attachments/assets/048079cb-e42f-4ae1-8a35-7247c652e38c" />
 
-Dark Mode:
+Modo Oscuro:  
 <img width="1920" height="1789" alt="FireShot Capture 097 - Brinf Music Journal -  brinf-music-journal vercel app" src="https://github.com/user-attachments/assets/f96d95c8-4567-405b-bc16-dc2ccda2ec4e" />
 
 ---
 
-## ✨ Key Features
+## ✨ Características Principales
 
-- **Curated Content:** Fetches your personally curated 'Loved Tracks' from Last.fm, not just recent listens.  
-- **AI-Powered Content Generation:** Uses the Gemini 1.5 Flash model to create poetic and creative texts based on song titles and artists.  
-- **Professional UI/UX:** A modern and aesthetically pleasing interface built with a professional component library.  
-- **Dark/Light Mode:** Fully implemented theme switching for user comfort.  
-- **Dynamic & Interactive:** Smooth animations, hover effects, and loading states provide an engaging user experience.  
-- **Secure Backend:** API keys are handled securely in the Next.js backend, never exposing them on the client side.  
+- **Contenido Curado:** Obtiene tus canciones marcadas como “Loved Tracks” en Last.fm, no solo tus escuchas recientes.  
+- **Generación de Contenido con IA:** Usa el modelo Gemini 1.5 Flash para crear textos poéticos y creativos basados en los títulos de canciones y artistas.  
+- **UI/UX Profesional:** Interfaz moderna y visualmente atractiva construida con una librería de componentes profesional.  
+- **Modo Claro/Oscuro:** Cambio de tema completamente implementado para mayor comodidad del usuario.  
+- **Dinámico e Interactivo:** Animaciones fluidas, efectos hover y estados de carga para una experiencia amigable.  
+- **Backend Seguro:** Las claves de API se manejan de forma segura en el backend de Next.js, sin exponerlas al cliente.  
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Framework:** Next.js (with App Router)  
-- **Language:** TypeScript  
-- **UI Components:** Shadcn/ui  
-- **Styling:** Tailwind CSS  
-- **Animations:** Framer Motion  
-- **Theming:** next-themes  
-- **Icons:** Lucide React  
-- **Music API:** Last.fm API  
-- **Artificial Intelligence API:** Google AI Studio (Gemini API)  
-- **Deployment:** Vercel  
+- **Framework:** Next.js (con App Router)  
+- **Lenguaje:** TypeScript  
+- **Componentes UI:** Shadcn/ui  
+- **Estilos:** Tailwind CSS  
+- **Animaciones:** Framer Motion  
+- **Temas:** next-themes  
+- **Íconos:** Lucide React  
+- **API de Música:** Last.fm API  
+- **API de Inteligencia Artificial:** Google AI Studio (Gemini API)  
+- **Despliegue:** Vercel  
 
 ---
 
-## 🚀 Getting Started & Local Setup
+## 🚀 Inicio Rápido & Configuración Local
 
-Follow these steps to get the project running on your local machine.
+Sigue estos pasos para ejecutar el proyecto en tu máquina local.
 
-### 1. Clone the repository
+### 1. Clonar el repositorio
 
-    git clone https://github.com/LyVenegas/brinf-music-journal.git
-    cd brinf-music-journal
+```bash
+git clone https://github.com/LyVenegas/brinf-music-journal.git
+cd brinf-music-journal
+```
 
 ### 2. Install dependencies
-
+```bash
 This project uses npm as the package manager.
-
+```
     npm install
 
 ### 3. Set up environment variables
 
 Create a file named **.env.local** in the root of the project. This file will hold your secret API keys.
-
+```bash
     # .env.local
 
     # Key obtained from Google AI Studio (https://aistudio.google.com/app/apikey)
@@ -62,11 +65,11 @@ Create a file named **.env.local** in the root of the project. This file will ho
 
     # Key obtained from Last.fm (https://www.last.fm/api/account/create)
     LASTFM_API_KEY="YOUR_LASTFM_API_KEY_HERE"
-
+```
 ### 4. Run the development server
-
+```bash
     npm run dev
-
+```
 ### 5. Open the application
 
 Go to **http://localhost:3000** in your browser to see the project in action.
