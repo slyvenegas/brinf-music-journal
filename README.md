@@ -48,64 +48,64 @@ git clone https://github.com/LyVenegas/brinf-music-journal.git
 cd brinf-music-journal
 ```
 
-### 2. Install dependencies
+### 2. Instalar dependencias
+Este proyecto usa npm como gestor de paquetes.
 ```bash
-This project uses npm as the package manager.
-```
     npm install
+```
 
-### 3. Set up environment variables
+### 3. Configurar variables de entorno
 
-Create a file named **.env.local** in the root of the project. This file will hold your secret API keys.
+Crea un archivo llamado **.env.local** en la raíz del proyecto.
 ```bash
     # .env.local
 
-    # Key obtained from Google AI Studio (https://aistudio.google.com/app/apikey)
-    GOOGLE_API_KEY="YOUR_GOOGLE_API_KEY_HERE"
+# Clave obtenida en Google AI Studio (https://aistudio.google.com/app/apikey)
+GOOGLE_API_KEY="TU_GOOGLE_API_KEY_AQUÍ"
 
-    # Key obtained from Last.fm (https://www.last.fm/api/account/create)
-    LASTFM_API_KEY="YOUR_LASTFM_API_KEY_HERE"
+# Clave obtenida en Last.fm (https://www.last.fm/api/account/create)
+LASTFM_API_KEY="TU_LASTFM_API_KEY_AQUÍ"
+
 ```
-### 4. Run the development server
+### 4. Ejecutar el servidor de desarrollo
 ```bash
     npm run dev
 ```
-### 5. Open the application
+### 5. Abrir la aplicación
 
-Go to **http://localhost:3000** in your browser to see the project in action.
+En tu navegador ve a 👉 **http://localhost:3000**
 
 ---
 
-## 🔌 API Endpoints
+## 🔌 Endpoints de la API
 
 The project currently exposes the following API endpoints to be consumed by the frontend:
 
 ### POST /api/generate
-Generates creative text content using the Gemini API.  
+Genera contenido creativo usando la API de Gemini. 
 
 **Body (JSON):**
 
     {
-      "prompt": "A detailed prompt for the AI model."
+         "prompt": "Un prompt detallado para el modelo de IA."
     }
 
 ### GET /api/lastfm
-Fetches the user's "Loved Tracks" from Last.fm.  
+Obtiene las “canciones favoritas” del usuario desde Last.fm.
 
 **Query Params:**
-- `user` (required): The Last.fm username.
+- `user` (obligatorio): El nombre de usuario de Last.fm.
 
 **Example:**  
 
-    /api/lastfm?user=your_username
+    /api/lastfm?user=tu_usuario
 
 ---
+##  🗺️ Hoja de Ruta Futura
 
-## 🗺️ Future Roadmap
-
-- [x] Build the user interface with React to visualize tracks and posts.  
-- [ ] Add a database (e.g., Vercel Postgres with Prisma) to persist the generated entries.  
-- [ ] Implement pagination to navigate through the entire list of Loved Tracks.  
-- [ ] Integrate AI-powered image generation to accompany each blog post.  
-- [ ] Add social sharing buttons for the "sound postcards".  
-- [ ] Refine the AI prompt for even more creative and varied results.  
+- [x] Construir la interfaz de usuario con React para visualizar canciones y posts.
+- [ ] Añadir una base de datos (ej. Vercel Postgres con Prisma) para guardar las entradas generadas.
+- [ ] Implementar paginación para navegar por toda la lista de Loved Tracks.
+- [ ] Integrar generación de imágenes con IA para acompañar cada publicación.
+- [ ] Añadir botones para compartir en redes sociales las “postales sonoras”.
+- [ ] Refinar el prompt de IA para obtener resultados aún más creativos y variados.
